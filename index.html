@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Tom 💗</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #050005;
+  color: white;
+  font-family: Georgia, serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-x: hidden;
+  transition: background 1.5s;
+  padding: 25px 12px;
+}
+
+body.lit {
+  background: radial-gradient(circle at center,
+    #ff9bd7, #ff3ca6, #e90077);
+}
+
+h2 {
+  color: #ff8dcf;
+  text-shadow: 0 0 15px #ff1493;
+  margin-bottom: 5px;
+}
+
+.subtitle {
+  color: #ffc2e5;
+  font-size: 14px;
+}
+
+.scene {
+  height: 230px;
+  width: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  position: relative;
+  margin: 25px 0;
+}
+
+.candle {
+  position: relative;
+  height: 135px;
+  width: 58px;
+  border-radius: 8px 8px 5px 5px;
+  background: linear-gradient(90deg,
+    #d40070, #ffb0dd, #ff58b4, #c90069);
+  box-shadow: 0 0 20px #ff1493;
+}
+
+.wax {
+  position: absolute;
+  top: -5px;
+  height: 15px;
+  width: 58px;
+  border-radius: 50%;
+  background: #ffc0e4;
+}
+
+.wick {
+  position: absolute;
+  top: -21px;
+  left: 28px;
+  height: 22px;
+  width: 3px;
+  background: #44202e;
+}
+
+.flame {
+  position: absolute;
+  top: -63px;
+  left: 17px;
+  width: 26px;
+  height: 43px;
+  border-radius: 50% 50% 45% 45%;
+  background: radial-gradient(ellipse at 50% 70%,
+    white 0%, #fff4a3 22%, #ffb000 55%, #ff4b00 80%);
+  filter: drop-shadow(0 0 12px #fff0a0)
+          drop-shadow(0 0 30px #ff1493);
+  animation: flicker .6s infinite alternate;
+  display: none;
+}
+
+.candle.lit .flame { display: block; }
+
+@keyframes flicker {
+  from { transform: rotate(-5deg) scale(1); }
+  to { transform: rotate(5deg) scale(1.1,.94); }
+}
+
+.glow {
+  position: absolute;
+  width: 150px;
+  height: 30px;
+  bottom: -12px;
+  border-radius: 50%;
+  background: #ff1493;
+  filter: blur(20px);
+}
+
+input {
+  width: 220px;
+  max-width: 90%;
+  padding: 13px;
+  border: 1px solid #ff69b4;
+  border-radius: 30px;
+  background: #190010;
+  color: white;
+  outline: none;
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+
+button {
+  margin: 12px 4px;
+  padding: 12px 22px;
+  border: none;
+  border-radius: 30px;
+  background: #ff1493;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 15px #ff1493;
+}
+
+#message {
+  max-width: 350px;
+  line-height: 1.7;
+  color: #ffd6ee;
+  padding: 0 12px;
+}
+
+.letter {
+  display: none;
+  max-width: 350px;
+  width: 94%;
+  padding: 22px 16px;
+  margin-top: 15px;
+  border: 1px solid rgba(255,255,255,.7);
+  border-radius: 20px;
+  background: rgba(255, 20, 147, .23);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 30px rgba(255,255,255,.25);
+  animation: appear 1.4s ease both;
+}
+
+.letter.show { display: block; }
+
+.letter h1 {
+  font-size: 27px;
+  color: white;
+  text-shadow: 0 0 12px #ff1493;
+}
+
+.letter p {
+  font-size: 17px;
+  line-height: 1.8;
+}
+
+.kiss {
+  font-size: 40px;
+  display: inline-block;
+  animation: kiss 1s infinite alternate;
+}
+
+@keyframes kiss {
+  from { transform: scale(1) rotate(-8deg); }
+  to { transform: scale(1.25) rotate(8deg); }
+}
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(25px) scale(.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.heart {
+  position: fixed;
+  top: -30px;
+  pointer-events: none;
+  animation: fall linear forwards;
+  z-index: 5;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+.hidden { display: none !important; }
+</style>
+</head>
+
+<body>
+
+<h2>♡ A Little Surprise For You ♡</h2>
+<p class="subtitle">Someone special has a surprise for you... 💌</p>
+
+<div class="scene" id="scene">
+  <div class="glow"></div>
+  <div class="candle" id="candle">
+    <div class="wax"></div>
+    <div class="wick"></div>
+    <div class="flame"></div>
+  </div>
+</div>
+
+<div id="entry">
+  <input id="secret" placeholder="Secret code 🤫"
+         autocomplete="off" />
+  <br>
+  <button onclick="unlock()">Unlock My Surprise 💗</button>
+  <p id="message">Only the special person knows the secret...</p>
+</div>
+
+<div class="letter" id="letter">
+  <div class="kiss">💋</div>
+  <h1>Happy Birthday, Tom! 🎂</h1>
+  <p>
+    Happy birthday to you, dear! 🥹💗
+    <br><br>
+    I love you, Tom, more than words can ever explain.
+    You make my world more beautiful just by being in it.
+    I wish you endless happiness, love, and all the beautiful
+    things you deserve. 🫶🏻
+    <br><br>
+    You will always have a special place in my heart.
+    Today is your day, my favourite person. 💞
+    <br><br>
+    <b>I love you, Tom. Mwahhhhhhh! 😚💋</b>
+  </p>
+  <div style="font-size:25px">🎂 💗 🧸 💋</div>
+  <button onclick="blow()">Blow Out The Candle 🕯️</button>
+</div>
+
+<script>
+function unlock() {
+  const code = document.getElementById("secret").value.trim();
+
+  if (code.toUpperCase() === "TOM") {
+    document.body.classList.add("lit");
+    document.getElementById("candle").classList.add("lit");
+    document.getElementById("entry").classList.add("hidden");
+    document.getElementById("letter").classList.add("show");
+
+    showerHearts();
+    setTimeout(showerHearts, 1200);
+  } else {
+    document.getElementById("message").textContent =
+      "Hehe, wrong code! Try again, my love 💗";
+  }
+}
+
+document.getElementById("secret").addEventListener("keydown", e => {
+  if (e.key === "Enter") unlock();
+});
+
+function showerHearts() {
+  for (let i = 0; i < 35; i++) {
+    const h = document.createElement("span");
+    h.className = "heart";
+    h.textContent = ["💗","💕","💖","♡","💋"][Math.floor(Math.random()*5)];
+    h.style.left = Math.random() * 100 + "vw";
+    h.style.animationDuration = (3 + Math.random()*4) + "s";
+    h.style.animationDelay = Math.random()*2 + "s";
+    h.style.fontSize = (15 + Math.random()*18) + "px";
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 9000);
+  }
+}
+
+function blow() {
+  document.getElementById("candle").classList.remove("lit");
+  document.body.classList.remove("lit");
+
+  document.querySelector("#letter h1").textContent =
+    "Your wish is in my heart 💗";
+
+  document.querySelector("#letter p").innerHTML =
+    "Happy birthday again, my Tom! 🥹💕" +
+    "<br><br>May all your dreams come true." +
+    "<br><br>I love you forever and ever..." +
+    "<br><br><b>Mwahhhhhhh! 😚💋</b>";
+
+  showerHearts();
+}
+</script>
+
+</body>
+</html>
